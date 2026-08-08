@@ -1,209 +1,664 @@
 ================================================================================
-           150-DAY FULL-STACK AI ENGINEER BLUEPRINT (JAVA + AWS)
+          150-DAY FULL-STACK AI ENGINEER BLUEPRINT
+       JAVA + SPRING AI + OLLAMA + RAG + AGENTS + AWS
 ================================================================================
 
 --- THE ARCHITECTURE SYSTEM ---
-Frontend: Next.js + TypeScript + Tailwind CSS + shadcn/ui
-Backend: Spring Boot (Java 17/21) + Spring AI / LangChain4j
-Cloud & Data: AWS Bedrock (Claude 3.5 & Amazon Nova) + PostgreSQL (pgvector)
 
---------------------------------------------------------------------------------
-PHASE 1: SPRING AI, AWS BEDROCK, & STATEFUL BACKEND (DAYS 1–30)
---------------------------------------------------------------------------------
-[ ] Day 1: Initialize a Spring Boot 3.3+ project with Java 17/21. Add spring-ai-bedrock-ai-starter.
-[ ] Day 2: Create an AWS Account. Set up an IAM User with AmazonBedrockFullAccess.
-[ ] Day 3: Request access to Anthropic Claude 3.5 Sonnet and Amazon Nova in AWS Bedrock Console.
-[ ] Day 4: Configure application.properties with AWS keys, region, and select model.
-[ ] Day 5: Write BedrockChatService.java injecting ChatModel to return basic string responses.
-[ ] Day 6: Build a REST ChatController.java to expose your service via a POST mapping.
-[ ] Day 7: Implement System Prompts to force the LLM to behave like a strict analyst.
-[ ] Day 8: Adjust temperature and topP parameters dynamically via request parameters.
-[ ] Day 9: Implement streaming text generation using Flux<ChatResponse> and Server-Sent Events.
-[ ] Day 10: Build an in-memory chat history map using a concurrent hashmap.
-[ ] Day 11: Replace the raw map with Spring AI's official InMemoryChatMemory abstraction.
-[ ] Day 12: Test your stateful chat to ensure the backend remembers previous messages.
-[ ] Day 13: Refactor chat history storage to link ChatMemory to a persistent database.
-[ ] Day 14: Create structured Prompt Templates inside your resources folder with placeholders.
-[ ] Day 15: Write a Java service to dynamically populate placeholders from JSON requests.
-[ ] Day 16: Implement structured JSON outputs using Spring AI's BeanOutputConverter.
-[ ] Day 17: Write logic to handle and retry malformed JSON responses from the AI.
-[ ] Day 18: Switch your application configuration to point to Amazon Nova model variants.
-[ ] Day 19: Implement asynchronous AI processing using Spring's @Async annotation.
-[ ] Day 20: Set up structured logging to track payload sizes and execution times.
-[ ] Day 21: Create a dedicated @ControllerAdvice error handler for Bedrock timeouts.
-[ ] Day 22: Refactor code, remove hardcoded strings, and optimize Thread Pools.
-[ ] Day 23: Initialize a parallel LangChain4j project to compare frameworks.
-[ ] Day 24: Re-implement streaming text generation using LangChain4j declarative interfaces.
-[ ] Day 25: Implement token-counting operations using framework tokenizers.
-[ ] Day 26: Build a basic usage tracker that saves estimated API usage costs per session.
-[ ] Day 27: Write comprehensive unit tests for prompt template parsers using JUnit 5.
-[ ] Day 28: Mock the AWS Bedrock client libraries to test controllers without API costs.
-[ ] Day 29: Create a clean GitHub Repository named enterprise-ai-core and commit code.
-[ ] Day 30: Write a functional documentation README detailing your streaming architecture.
+Frontend:
+Next.js + TypeScript + Tailwind CSS + shadcn/ui
 
---------------------------------------------------------------------------------
-PHASE 2: ENTERPRISE RAG & DATA ENGINEERING (DAYS 31–60)
---------------------------------------------------------------------------------
-[ ] Day 31: Study the theory of RAG, data embedding vectors, and cosine similarity.
-[ ] Day 32: Install PostgreSQL locally via a Docker container or spin up Amazon RDS.
-[ ] Day 33: Enable the pgvector extension using CREATE EXTENSION IF NOT EXISTS vector.
-[ ] Day 34: Add the spring-ai-pgvector-store-starter dependency to your Maven pom.xml.
-[ ] Day 35: Define the PgVectorStore Bean mapped to your database credentials.
-[ ] Day 36: Configure an embedding model in Java using Amazon Bedrock's Titan Embedding.
-[ ] Day 37: Write DocumentIngestionService.java to read raw .txt files using Java NIO.
-[ ] Day 38: Integrate TokenTextSplitter to break text into chunks of 500 tokens.
-[ ] Day 39: Convert text chunks into Document objects with custom metadata maps.
-[ ] Day 40: Execute VectorStore.add(List<Document>) and verify rows populate in PostgreSQL.
-[ ] Day 41: Inspect the database table manually to examine vector arrays and indexes.
-[ ] Day 42: Write a search service method: List<Document> findSimilarDocs(String query).
-[ ] Day 43: Build the RAG Pipeline: question -> vector search -> prompt injection -> Bedrock.
-[ ] Day 44: Test the pipeline with a question whose answer only exists in your private text file.
-[ ] Day 45: Upgrade the ingestion process using Apache Tika to read and parse PDF files.
-[ ] Day 46: Implement metadata filtering mechanisms to narrow down vector queries.
-[ ] Day 47: Spin up an Amazon OpenSearch Service developer node on AWS or local Docker.
-[ ] Day 48: Swap out PgVectorStore configuration for the OpenSearchVectorStore starter.
-[ ] Day 49: Re-run your chunk ingestion pipeline to feed documents into OpenSearch.
-[ ] Day 50: Write a dual-retrieval service that combines semantic search with keyword search.
-[ ] Day 51: Implement a Reranking layer using a Cohere or Bedrock rerank model API.
-[ ] Day 52: Write a Java scheduled task (@Scheduled) to purge old vector chunks.
-[ ] Day 53: Add an HNSW index over your pgvector column to speed up search routines.
-[ ] Day 54: Write logic to handle real-time database schema changes for new document versions.
-[ ] Day 55: Create a multi-tenant strategy where data vectors are tagged with a tenant_id.
-[ ] Day 56: Build integration tests that ingest a sample document, query it, and clear data.
-[ ] Day 57: Profile memory usage during text chunking to avoid OutOfMemory errors.
-[ ] Day 58: Isolate your RAG extraction algorithms into a clean domain service layer.
-[ ] Day 59: Commit code, push to GitHub, and update system schema diagrams.
-[ ] Day 60: Milestone: Ingestion and search backend engine ready for unstructured documents.
+Backend:
+Spring Boot + Java 17/21 + Spring AI + LangChain4j
 
---------------------------------------------------------------------------------
-PHASE 3: AUTONOMOUS AI AGENTS & TOOL EXECUTION (DAYS 61–90)
---------------------------------------------------------------------------------
-[ ] Day 61: Study the core theory of Function Calling and Agentic Workflows.
-[ ] Day 62: Write dummy business methods: fetchInvoiceStatus(id) and triggerRefund(id).
-[ ] Day 63: Register your methods as functional Java beans using the @Bean structure.
-[ ] Day 64: Attach these tool beans to your Bedrock ChatOptions execution calls.
-[ ] Day 65: Run a test request and watch Bedrock halt text to send a tool call request.
-[ ] Day 66: Verify your Java method output routes back to Bedrock for a final text response.
-[ ] Day 67: Implement parameter validation to handle missing input variables from the LLM.
-[ ] Day 68: Study the Model Context Protocol (MCP) specification for standard connections.
-[ ] Day 69: Add the new Spring AI MCP starter dependencies into your build configurations.
-[ ] Day 70: Build an MCP Server configuration inside your Java ecosystem.
-[ ] Day 71: Connect your Spring AI client to an external open-source MCP server.
-[ ] Day 72: Build an autonomous multi-step loop using the ReAct framework.
-[ ] Day 73: Introduce human-in-the-loop validation hooks before sensitive tool execution.
-[ ] Day 74: Create a stateful agent tracker component that logs tool loops to an audit database.
-[ ] Day 75: Write a tool using AWS SDK v2 for Java to inspect S3 buckets via chat.
-[ ] Day 76: Build a web-scraping tool using JSoup and register it with the AI Agent.
-[ ] Day 77: Interrupt agent execution threads automatically after 4 runaway cycles.
-[ ] Day 78: Transition to LangChain4j Agents to compare control and readability.
-[ ] Day 79: Build a multi-agent system prototype featuring a Manager and specialized workers.
-[ ] Day 80: Implement an agent communication bus using internal Spring Application Events.
-[ ] Day 81: Handle complex array returns and verify mapping to JSON formats.
-[ ] Day 82: Secure arguments before parsing them into database query strings to prevent injection.
-[ ] Day 83: Design a monitoring endpoint (/api/v1/agents/active) to list running loops.
-[ ] Day 84: Build integration tests where a mock user prompts a multi-tool requirement.
-[ ] Day 85: Profile latency overheads introduced by multiple round-trips to the Bedrock API.
-[ ] Day 86: Optimize context sizes by removing old tool response texts from long loops.
-[ ] Day 87: Clean up your codebase configuration blocks and standardize bean names.
-[ ] Day 88: Push the working agent code to GitHub and write usage schemas.
-[ ] Day 89: Build a short test suite ensuring human-in-the-loop pauses work accurately.
-[ ] Day 90: Milestone: Fully capable, tool-calling autonomous AI Agent engine running on Java.
+Local AI:
+Ollama + Llama / Qwen / Gemma
 
---------------------------------------------------------------------------------
-PHASE 4: ENTERPRISE TESTING, GUARDRAILS & SECURITY (DAYS 91–120)
---------------------------------------------------------------------------------
-[ ] Day 91: Study the OWASP Top 10 vulnerabilities list for LLM applications.
-[ ] Day 92: Create a new custom guardrail named enterprise-security-shield in Bedrock Console.
-[ ] Day 93: Configure Denied Topics to block sensitive or unauthorized company topics.
-[ ] Day 94: Configure Content Filters for hate speech, insults, and toxic text.
-[ ] Day 95: Configure PII Redaction to automatically mask emails, phone numbers, and IDs.
-[ ] Day 96: Connect your Spring Boot app to this specific Guardrail using BedrockChatOptions.
-[ ] Day 97: Test the guardrail defenses with malicious prompts and verify blocks work.
-[ ] Day 98: Write an automated Java interceptor to pre-scan incoming chat inputs for injections.
-[ ] Day 99: Set up LLM-as-a-Judge testing architectures using an isolated LLM instance.
---------------------------------------------------------------------------------
-PHASE 4 (CONTINUED): ENTERPRISE TESTING, GUARDRAILS & SECURITY (DAYS 100–120)
---------------------------------------------------------------------------------
-[ ] Day 100: Learn RAG Evaluation metrics: Faithfulness and Answer Relevance.
-[ ] Day 101: Automate testing over a fixed JSON validation dataset using LangChain4j modules.
-[ ] Day 102: Generate an accuracy metric report showing passing grades vs. hallucination ratios.
-[ ] Day 103: Test for Prompt Drift over multiple batches to track consistency.
-[ ] Day 104: Implement rate-limiting protection using the Resilience4j framework.
-[ ] Day 105: Configure circuit breakers to fall back to a local model if Bedrock drops.
-[ ] Day 106: Build an output sanitation layer to clean malicious HTML tags from responses.
-[ ] Day 107: Configure email or Slack webhook alarms for consecutive content filter blocks.
-[ ] Day 108: Enforce rigid upper limits on max output tokens to prevent runaway cost attacks.
-[ ] Day 109: Ensure your pgvector database service user has highly restrictive read-only access.
-[ ] Day 110: Run complete integration security checks on all tool execution structures.
-[ ] Day 111: Document your exact AI Testing and Validation strategy inside your repository.
-[ ] Day 112: Refactor defensive strategies into clean Spring AOP (@Aspect) annotations.
-[ ] Day 113: Audit configurations for cross-origin setups (CORS) to lock down endpoints.
-[ ] Day 114: Verify your logging structures mask all sensitive data strings.
-[ ] Day 115: Update external framework versions across Maven configurations to patch flaws.
-[ ] Day 116: Run profile benchmarks evaluating overhead costs added by running interceptors.
-[ ] Day 117: Establish a clean CI/CD automated test phase file using GitHub Actions.
-[ ] Day 118: Stress-test your application components using an open-source tool like Apache JMeter.
-[ ] Day 119: Commit and synchronize all security framework builds up to GitHub.
-[ ] Day 120: Milestone: Hardened, bulletproof AI application architecture equipped with validation.
+Data:
+PostgreSQL + pgvector
 
---------------------------------------------------------------------------------
-PHASE 5: MODERN FRONTEND & CLOUD PRODUCTION (DAYS 121–150)
---------------------------------------------------------------------------------
-[ ] Day 121: Initialize a clean Next.js 14+ (App Router) workspace using TypeScript.
-[ ] Day 122: Build a clean responsive layout with a sidebar navigation system.
-[ ] Day 123: Install shadcn/ui components (Buttons, Cards, Inputs, ScrollAreas).
-[ ] Day 124: Create a custom React hook useAiStream.ts to manage streaming HTTP endpoints.
-[ ] Day 125: Implement text streaming processing using ReadableStream readers in Next.js.
-[ ] Day 126: Build a chat interface UI complete with user vs. AI bubbles and loading states.
-[ ] Day 127: Implement chat session management tabs on the sidebar layout.
-[ ] Day 128: Build an Agent Status Panel to visually show tool calling or thinking states.
-[ ] Day 129: Build an administrative web page to drag-and-drop file inputs for ingestion.
-[ ] Day 130: Connect the upload form to your Spring Boot REST multi-part file controllers.
-[ ] Day 131: Add markdown rendering capability on the frontend using react-markdown.
-[ ] Day 132: Add copy-to-clipboard functionality and user feedback buttons below messages.
-[ ] Day 133: Perform cross-browser testing across Chrome, Safari, and Firefox engines.
-[ ] Day 134: Containerize the Next.js frontend application using a multi-stage Dockerfile.
-[ ] Day 135: Write a solid docker-compose.yml combining Next.js, Spring Boot, and PostgreSQL.
-[ ] Day 136: Initialize an Amazon ECR (Elastic Container Registry) space in your AWS console.
-[ ] Day 137: Authenticate your local Docker engine and push both images up to Amazon ECR.
-[ ] Day 138: Create an Amazon ECS cluster running on serverless AWS Fargate nodes.
-[ ] Day 139: Formulate task definitions configuring memory limits, CPU sizing, and environment variables.
-[ ] Day 140: Configure an AWS Application Load Balancer to evenly route internet traffic safely.
-[ ] Day 141: Set up your relational database layer using production-tier Amazon RDS PostgreSQL.
-[ ] Day 142: Implement strict AWS Security Group configurations to protect the database layer.
-[ ] Day 143: Connect your application logging channels to Amazon CloudWatch dashboards.
-[ ] Day 144: Map custom DNS routing configurations using Amazon Route 53 or your domain provider.
-[ ] Day 145: Run live end-to-end user tests directly on your production cloud URL.
-[ ] Day 146: Profile performance latency across live cloud setups and tune database pools.
-[ ] Day 147: Write a final documentation manual inside your git repositories explaining operations.
-[ ] Day 148: Record an engaging 5-minute video walkthrough showcasing your system's capabilities.
-[ ] Day 149: Put the final touches on your portfolio representations across GitHub and LinkedIn.
-[ ] Day 150: Milestone Achieved. Evolved into a highly specialized Full-Stack AI Engineer.
+AI Systems:
+LLM + Prompt Engineering + Memory + RAG + Agents + Tools + MCP
+
+Cloud:
+AWS + Amazon Bedrock + ECR + ECS + RDS + CloudWatch
+
+PRIMARY STRATEGY:
+Learn locally and free first.
+Build the complete AI system locally.
+Then migrate the same architecture to AWS.
+
+================================================================================
+PHASE 1: SPRING AI, LOCAL LLM & STATEFUL BACKEND (DAYS 1–30)
 ================================================================================
 
+[ ] Day 1: Initialize a Spring Boot project with Java 17/21, Maven, Spring Web,
+    DevTools and Lombok. Understand the complete Spring Boot project structure.
 
+[ ] Day 2: Install and configure Ollama. Learn ollama pull, ollama run,
+    ollama list and understand how local LLM execution works.
 
-## Overview of Your 150-Day Journey
+[ ] Day 3: Study LLM fundamentals: tokens, context windows, parameters,
+    model size, quantization, local vs cloud LLMs and model families.
 
-You are looking at a rigorous, industry-grade blueprint designed to transform a standard developer into a specialized **Full-Stack AI Engineer** proficient in Java (Spring Boot / Spring AI / LangChain4j), AWS Bedrock, Vector Databases, Autonomous Agents, Guardrails, and Next.js. 
+[ ] Day 4: Add Spring AI Ollama integration. Configure a local model and
+    understand the ChatModel abstraction.
 
----
+[ ] Day 5: Write ChatService.java injecting ChatModel and return a basic
+    AI-generated string response.
 
-### Key Technology Stack Matrix
+[ ] Day 6: Build ChatController.java and expose POST /api/chat.
+    Test the API using Postman.
 
-| Tier | Primary Technologies | Core Responsibilities |
-| :--- | :--- | :--- |
-| **Frontend** | Next.js, TypeScript, Tailwind CSS, shadcn/ui | UI rendering, streaming responses, chat layouts, admin dashboards. |
-| **Backend** | Spring Boot (Java 17/21), Spring AI, LangChain4j | Business logic, REST controllers, SSE streaming, chat memory management. |
-| **Cloud & AI** | AWS Bedrock (Claude 3.5 Sonnet, Amazon Nova), Titan | LLM hosting, text generation, embedding vector processing, native guardrails. |
-| **Database & Vector** | PostgreSQL (`pgvector`), Amazon OpenSearch | Relational persistence, session storage, semantic vector chunk indexing. |
+[ ] Day 7: Implement System Prompts and User Prompts. Force the LLM to
+    behave like a strict analyst.
 
----
+[ ] Day 8: Dynamically configure temperature, topP and maximum output tokens.
+    Compare deterministic and creative responses.
 
-### Phase Breakdown Summary
+[ ] Day 9: Implement streaming text generation using Flux<ChatResponse>
+    and Server-Sent Events.
 
-*   **Phase 1 (Days 1–30):** Foundation of **Spring AI**, connecting to **AWS Bedrock**, implementing chat memory, prompt templates, structured JSON mapping, and streaming response setups using Server-Sent Events (SSE).
-*   **Phase 2 (Days 31–60):** **Enterprise RAG & Data Engineering**, integrating `pgvector` and OpenSearch, using Apache Tika for parsing PDFs, metadata filtering, chunking strategies, and hybrid retrieval.
-*   **Phase 3 (Days 61–90):** **Autonomous AI Agents & Tool Execution**, implementing function calling, Model Context Protocol (MCP), ReAct loops, tool safety bounds, and multi-agent coordination.
-*   **Phase 4 (Days 91–120):** **Enterprise Testing, Guardrails & Security**, configuring AWS Bedrock Guardrails, PII redaction, Resilience4j circuit breakers, rate-limiting, and evaluation metrics (faithfulness/relevance).
-*   **Phase 5 (Days 121–150):** **Modern Frontend & Cloud Production**, developing the Next.js App Router UI, containerizing via Docker, orchestration on **AWS ECS Fargate**, managing RDS PostgreSQL, and launching live production traffic.
+[ ] Day 10: Build an in-memory chat history using ConcurrentHashMap and
+    understand stateless vs stateful APIs.
+
+[ ] Day 11: Replace the manual map with Spring AI's chat memory abstraction.
+
+[ ] Day 12: Test multiple conversations and verify that the backend
+    remembers previous messages for each session.
+
+[ ] Day 13: Connect chat memory to PostgreSQL and persist conversations
+    and messages.
+
+[ ] Day 14: Create structured Prompt Templates inside the resources folder
+    with reusable placeholders.
+
+[ ] Day 15: Write a Java service to dynamically populate prompt placeholders
+    from JSON requests.
+
+[ ] Day 16: Implement structured JSON outputs and map AI responses into
+    Java DTOs.
+
+[ ] Day 17: Detect malformed JSON responses, validate output and implement
+    retry/fallback logic.
+
+[ ] Day 18: Download and compare multiple local models such as Llama, Qwen
+    and Gemma. Compare speed, coding ability and response quality.
+
+[ ] Day 19: Implement asynchronous AI processing using Spring's @Async
+    and understand thread pools.
+
+[ ] Day 20: Implement structured logging for request IDs, session IDs,
+    model names, payload sizes, execution time and failures.
+
+[ ] Day 21: Create a dedicated @ControllerAdvice global error handler for
+    model failures, timeouts, invalid requests and unavailable models.
+
+[ ] Day 22: Refactor configuration, remove hardcoded values and optimize
+    service and thread-pool architecture.
+
+[ ] Day 23: Initialize a small parallel LangChain4j project and compare
+    its architecture with Spring AI.
+
+[ ] Day 24: Re-implement basic streaming/chat generation using LangChain4j
+    with a local Ollama model.
+
+[ ] Day 25: Study token counting, context size, prompt size, response size
+    and AI latency.
+
+[ ] Day 26: Build a local AI usage tracker recording session, model,
+    prompt size, response size, latency and timestamp.
+
+[ ] Day 27: Write comprehensive unit tests using JUnit 5 for services,
+    prompt templates and controllers.
+
+[ ] Day 28: Mock ChatModel and build integration tests for failures,
+    malformed outputs, unavailable models and timeouts.
+
+[ ] Day 29: Create a clean GitHub repository named enterprise-ai-core.
+    Add .gitignore and commit the working AI backend.
+
+[ ] Day 30: Write a functional README documenting the Spring AI,
+    Ollama, memory and streaming architecture.
+
+================================================================================
+PHASE 2: ENTERPRISE RAG & DATA ENGINEERING (DAYS 31–60)
+================================================================================
+
+[ ] Day 31: Study RAG theory, embeddings, vectors, cosine similarity,
+    semantic search and why LLMs need external knowledge.
+
+[ ] Day 32: Configure PostgreSQL locally. Create database, user, credentials
+    and connect Spring Boot to PostgreSQL.
+
+[ ] Day 33: Install and enable pgvector using:
+    CREATE EXTENSION IF NOT EXISTS vector;
+
+[ ] Day 34: Add the Spring AI pgvector/vector-store dependency to Maven
+    and understand the VectorStore abstraction.
+
+[ ] Day 35: Configure PgVectorStore and verify connectivity with PostgreSQL.
+
+[ ] Day 36: Configure a local embedding model. Generate embeddings without
+    depending on AWS Bedrock.
+
+[ ] Day 37: Write DocumentIngestionService.java to read raw .txt files
+    using Java NIO.
+
+[ ] Day 38: Integrate TokenTextSplitter and learn chunk size and overlap.
+
+[ ] Day 39: Convert chunks into Document objects and attach metadata such as
+    filename, source, document ID, tenant ID and timestamps.
+
+[ ] Day 40: Execute VectorStore.add(List<Document>) and verify that
+    vectors are stored in PostgreSQL.
+
+[ ] Day 41: Inspect PostgreSQL vector records, dimensions, indexes and
+    similarity-search concepts.
+
+[ ] Day 42: Write:
+    List<Document> findSimilarDocuments(String query)
+    and implement semantic retrieval.
+
+[ ] Day 43: Build the complete local RAG pipeline:
+
+    question
+        ↓
+    embedding
+        ↓
+    vector search
+        ↓
+    relevant documents
+        ↓
+    prompt
+        ↓
+    Ollama
+        ↓
+    answer
+
+[ ] Day 44: Test the RAG system using a private document whose answer
+    does not exist in the base model's general knowledge.
+
+[ ] Day 45: Upgrade document ingestion using Apache Tika to extract
+    text from PDFs and additional document formats.
+
+[ ] Day 46: Implement metadata filtering to restrict vector searches
+    by user, category, tenant, date or document.
+
+[ ] Day 47: Study OpenSearch architecture and compare it with PostgreSQL
+    pgvector. Run OpenSearch locally with Docker if practical.
+
+[ ] Day 48: Study OpenSearch vector search and understand how the
+    VectorStore implementation changes between backends.
+
+[ ] Day 49: Ingest sample documents into the local OpenSearch environment
+    and compare retrieval with pgvector.
+
+[ ] Day 50: Build hybrid retrieval combining semantic/vector search
+    with traditional keyword search.
+
+[ ] Day 51: Implement and study reranking. Start with a local/basic
+    approach and understand how cloud rerankers can later replace it.
+
+[ ] Day 52: Create a Java scheduled task using @Scheduled to purge
+    expired or obsolete document chunks.
+
+[ ] Day 53: Add and benchmark an HNSW vector index for faster similarity search.
+
+[ ] Day 54: Implement document versioning and handle replacement of
+    old document versions.
+
+[ ] Day 55: Design a multi-tenant vector architecture using tenant_id.
+
+[ ] Day 56: Build integration tests that ingest a document, perform a
+    semantic search, generate an answer and clean up the test data.
+
+[ ] Day 57: Profile memory consumption during large-document ingestion
+    and optimize chunking to avoid OutOfMemory errors.
+
+[ ] Day 58: Isolate ingestion, retrieval, embedding and generation into
+    clean domain/service layers.
+
+[ ] Day 59: Commit the RAG system to GitHub and update architecture and
+    database diagrams.
+
+[ ] Day 60: MILESTONE — Enterprise Local RAG Backend completed.
+
+================================================================================
+PHASE 3: AUTONOMOUS AI AGENTS & TOOL EXECUTION (DAYS 61–90)
+================================================================================
+
+[ ] Day 61: Study Function Calling, Tool Calling, Agentic Workflows,
+    Agent loops and the difference between chatbots and agents.
+
+[ ] Day 62: Create dummy business methods:
+    fetchInvoiceStatus(id)
+    triggerRefund(id)
+
+[ ] Day 63: Register Java methods as AI tools and understand tool schemas,
+    parameters and return values.
+
+[ ] Day 64: Attach Java tools to Spring AI local-model execution.
+
+[ ] Day 65: Run a request where the LLM decides that it needs to call
+    a Java tool.
+
+[ ] Day 66: Route the Java tool result back to the LLM and generate
+    the final natural-language response.
+
+[ ] Day 67: Implement parameter validation for AI-generated tool arguments.
+
+[ ] Day 68: Study the Model Context Protocol (MCP) specification and
+    understand MCP clients, servers, tools and resources.
+
+[ ] Day 69: Add Spring AI MCP dependencies and understand MCP integration.
+
+[ ] Day 70: Build an MCP Server inside the Java ecosystem and expose
+    useful local tools.
+
+[ ] Day 71: Connect the Spring AI client to an external open-source
+    MCP server.
+
+[ ] Day 72: Build a multi-step ReAct-style agent loop:
+    Reason → Act → Observe → Continue/Finish.
+
+[ ] Day 73: Introduce human-in-the-loop approval before sensitive
+    tool execution.
+
+[ ] Day 74: Create an agent state tracker and audit database for
+    tool calls, iterations and outcomes.
+
+[ ] Day 75: Build a local file-system tool first and study how the
+    same architecture can later connect to AWS S3.
+
+[ ] Day 76: Build a web extraction tool using JSoup and register it
+    as an AI tool.
+
+[ ] Day 77: Protect the agent against runaway execution using maximum
+    iteration limits, timeouts and cancellation.
+
+[ ] Day 78: Build a comparable LangChain4j agent and compare readability,
+    control and abstractions.
+
+[ ] Day 79: Build a multi-agent prototype containing a Manager Agent
+    and specialized Research/Coding/Database workers.
+
+[ ] Day 80: Implement internal agent communication using Spring
+    Application Events.
+
+[ ] Day 81: Handle complex tool responses including arrays and nested
+    JSON structures.
+
+[ ] Day 82: Secure tool arguments and prevent SQL injection and
+    unauthorized database operations.
+
+[ ] Day 83: Build:
+    /api/v1/agents/active
+    to monitor currently running agents.
+
+[ ] Day 84: Build integration tests where a user request requires
+    multiple tools.
+
+[ ] Day 85: Measure agent latency, model round trips and tool execution time.
+
+[ ] Day 86: Optimize agent context by removing unnecessary historical
+    tool responses and reducing prompt size.
+
+[ ] Day 87: Clean configuration blocks and standardize bean/tool names.
+
+[ ] Day 88: Push the working agent engine to GitHub and document
+    every tool schema.
+
+[ ] Day 89: Build tests for human approval, rejected actions and
+    dangerous-tool prevention.
+
+[ ] Day 90: MILESTONE — Fully capable Local AI Agent Engine running on Java.
+
+================================================================================
+PHASE 4: ENTERPRISE AI TESTING, GUARDRAILS & SECURITY (DAYS 91–120)
+================================================================================
+
+[ ] Day 91: Study the OWASP Top 10 for LLM applications including
+    prompt injection, data leakage, excessive agency and insecure tools.
+
+[ ] Day 92: Build a custom application-level security layer named
+    enterprise-security-shield.
+
+[ ] Day 93: Implement denied-topic rules and input validation.
+
+[ ] Day 94: Implement content filtering and basic toxic-content policies.
+
+[ ] Day 95: Implement PII detection and masking for emails, phone numbers,
+    IDs and sensitive fields.
+
+[ ] Day 96: Build a Spring interceptor/filter that validates requests
+    before they reach the LLM.
+
+[ ] Day 97: Test the system against malicious prompts and prompt-injection
+    attempts.
+
+[ ] Day 98: Build an automated Java prompt-injection detection layer.
+
+[ ] Day 99: Build an LLM-as-a-Judge evaluation architecture using
+    a separate local evaluator model.
+
+[ ] Day 100: Learn RAG evaluation metrics:
+    Faithfulness, Answer Relevance and Context Relevance.
+
+[ ] Day 101: Create a fixed JSON evaluation dataset and automate
+    RAG evaluation.
+
+[ ] Day 102: Generate reports containing accuracy, relevance,
+    hallucination and pass/fail metrics.
+
+[ ] Day 103: Test Prompt Drift across multiple batches and detect
+    regression in model behavior.
+
+[ ] Day 104: Implement rate limiting using Resilience4j.
+
+[ ] Day 105: Implement a model fallback architecture:
+
+    Primary Model
+         ↓
+    Failure
+         ↓
+    Local Fallback Model
+
+[ ] Day 106: Build an output sanitation layer to remove dangerous
+    HTML and prevent XSS-style output issues.
+
+[ ] Day 107: Build application alerts for repeated security failures.
+    Email/Slack integration is optional.
+
+[ ] Day 108: Enforce maximum output tokens, request sizes and context
+    limits to protect against resource/cost abuse.
+
+[ ] Day 109: Configure restrictive PostgreSQL permissions using
+    least-privilege principles.
+
+[ ] Day 110: Perform complete security checks over AI tools,
+    database operations and agent execution.
+
+[ ] Day 111: Document the AI testing, security and validation strategy.
+
+[ ] Day 112: Refactor security logic using Spring AOP where appropriate.
+
+[ ] Day 113: Configure CORS, authentication and authorization controls.
+
+[ ] Day 114: Ensure logs mask sensitive data and secrets.
+
+[ ] Day 115: Audit Maven dependencies and update vulnerable libraries.
+
+[ ] Day 116: Benchmark the performance overhead introduced by
+    security interceptors and validation layers.
+
+[ ] Day 117: Create GitHub Actions CI pipeline for build and tests.
+
+[ ] Day 118: Stress-test the application using Apache JMeter.
+
+[ ] Day 119: Commit and synchronize the complete security and
+    testing architecture.
+
+[ ] Day 120: MILESTONE — Production-Quality Local AI Backend completed.
+
+================================================================================
+PHASE 5: NEXT.JS, FULL-STACK AI & AWS MIGRATION (DAYS 121–150)
+================================================================================
+
+[ ] Day 121: Initialize a Next.js application using TypeScript and
+    the App Router.
+
+[ ] Day 122: Build a responsive layout with sidebar navigation.
+
+[ ] Day 123: Install Tailwind CSS and shadcn/ui components including
+    Buttons, Cards, Inputs and ScrollAreas.
+
+[ ] Day 124: Create useAiStream.ts to manage streaming AI responses.
+
+[ ] Day 125: Implement streaming HTTP/SSE processing using ReadableStream.
+
+[ ] Day 126: Build a complete AI chat interface with user/AI bubbles,
+    loading states and streaming output.
+
+[ ] Day 127: Implement chat-session tabs and conversation history.
+
+[ ] Day 128: Build an Agent Status Panel showing:
+    Thinking / Searching / Calling Tool / Waiting Approval / Completed.
+
+[ ] Day 129: Build an administrative drag-and-drop document upload interface.
+
+[ ] Day 130: Connect the upload interface to Spring Boot multipart
+    document-ingestion endpoints.
+
+[ ] Day 131: Add Markdown rendering and syntax-highlighted code blocks.
+
+[ ] Day 132: Add copy-to-clipboard and user feedback functionality.
+
+[ ] Day 133: Perform browser, responsive and API integration testing.
+
+[ ] Day 134: Containerize the Next.js frontend using Docker.
+
+[ ] Day 135: Create docker-compose.yml combining:
+
+    Next.js
+    Spring Boot
+    PostgreSQL
+    Ollama
+
+[ ] Day 136: Study AWS fundamentals:
+    Regions, IAM, VPC, Security Groups, S3, ECR, ECS, RDS and CloudWatch.
+
+[ ] Day 137: Configure AWS cost protection:
+    Check current Free Tier/credits eligibility, understand billing,
+    configure budgets/alerts and learn how to delete resources safely.
+
+[ ] Day 138: Study Amazon Bedrock and understand model providers,
+    model access, IAM permissions, regions and current model availability.
+
+[ ] Day 139: Connect Spring AI to Amazon Bedrock and build a cloud-based
+    chat implementation.
+
+[ ] Day 140: Implement provider switching:
+
+    AI_PROVIDER=OLLAMA
+
+    or
+
+    AI_PROVIDER=BEDROCK
+
+    The application should switch AI providers through configuration.
+
+[ ] Day 141: Migrate the RAG generation layer from Ollama to Bedrock while
+    keeping PostgreSQL/pgvector retrieval architecture unchanged.
+
+[ ] Day 142: Study cloud embedding models and compare local embeddings
+    with cloud embeddings in terms of quality, speed and cost.
+
+[ ] Day 143: Build an AWS S3 document-storage integration and connect
+    S3 documents to the ingestion pipeline.
+
+[ ] Day 144: Build a Docker image and push the backend/frontend images
+    to Amazon ECR.
+
+[ ] Day 145: Deploy the application using Amazon ECS/Fargate if the
+    current AWS cost situation is safe; otherwise complete the deployment
+    architecture locally and document the cloud deployment.
+
+[ ] Day 146: Study/deploy PostgreSQL using Amazon RDS and understand
+    pgvector, networking and Security Groups.
+
+[ ] Day 147: Configure CloudWatch logs, metrics and application monitoring.
+
+[ ] Day 148: Design and document the final production architecture:
+
+    Next.js
+        ↓
+    Load Balancer
+        ↓
+    Spring Boot
+        ↓
+    Spring AI
+      ↙   ↘
+    Ollama  Bedrock
+              ↓
+             LLM
+        ↓
+    PostgreSQL + pgvector
+        ↓
+       RAG
+        ↓
+      Agents
+        ↓
+     Tools / MCP
+        ↓
+        S3
+
+[ ] Day 149: Finalize GitHub repositories, README files, architecture
+    diagrams, API documentation, security documentation, demo video
+    and LinkedIn portfolio presentation.
+
+[ ] Day 150: MILESTONE ACHIEVED.
+
+    FULL-STACK AI ENGINEER SYSTEM COMPLETED.
+
+================================================================================
+FINAL ARCHITECTURE
+================================================================================
+
+                         USER
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │     Next.js     │
+                  │   TypeScript    │
+                  └────────┬────────┘
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │   Spring Boot   │
+                  │      Java       │
+                  └────────┬────────┘
+                           │
+                  ┌────────┴────────┐
+                  │                 │
+                  ▼                 ▼
+             Spring AI         LangChain4j
+                  │
+          ┌───────┴────────┐
+          │                │
+          ▼                ▼
+       Ollama           Bedrock
+          │                │
+          ▼                ▼
+      Local LLM         Cloud LLM
+          │                │
+          └───────┬────────┘
+                  ▼
+                RAG
+                  │
+                  ▼
+          PostgreSQL/pgvector
+                  │
+                  ▼
+               Agents
+                  │
+          ┌───────┼────────┐
+          ▼       ▼        ▼
+        Tools    MCP      APIs
+                  │
+                  ▼
+               Docker
+                  │
+                  ▼
+                 AWS
+
+================================================================================
+FINAL SKILL SET
+================================================================================
+
+JAVA
+SPRING BOOT
+SPRING AI
+LANGCHAIN4J
+OLLAMA
+LLMs
+PROMPT ENGINEERING
+CHAT MEMORY
+STREAMING
+STRUCTURED OUTPUT
+POSTGRESQL
+PGVECTOR
+EMBEDDINGS
+RAG
+HYBRID SEARCH
+RERANKING
+AI AGENTS
+FUNCTION CALLING
+TOOL CALLING
+MCP
+MULTI-AGENT SYSTEMS
+HUMAN-IN-THE-LOOP
+LLM SECURITY
+PROMPT INJECTION DEFENSE
+PII PROTECTION
+RAG EVALUATION
+LLM-AS-A-JUDGE
+RESILIENCE4J
+SPRING AOP
+JUNIT
+JMETR
+GITHUB ACTIONS
+DOCKER
+NEXT.JS
+TYPESCRIPT
+TAILWIND
+SHADCN/UI
+AWS IAM
+AWS S3
+AWS BEDROCK
+AWS ECR
+AWS ECS
+AWS RDS
+AWS CLOUDWATCH
+
+================================================================================
+FINAL PROJECT GOAL
+================================================================================
+
+Build one complete enterprise-style AI platform that supports:
+
+✓ AI Chat
+✓ Streaming
+✓ Persistent Memory
+✓ Prompt Templates
+✓ Structured JSON
+✓ Multiple Local Models
+✓ Document Upload
+✓ PDF Processing
+✓ Embeddings
+✓ Vector Search
+✓ RAG
+✓ Hybrid Retrieval
+✓ Reranking
+✓ AI Agents
+✓ Tool Calling
+✓ MCP
+✓ Human Approval
+✓ Multi-Agent Workflows
+✓ Security & Guardrails
+✓ Evaluation
+✓ Next.js Frontend
+✓ Docker
+✓ PostgreSQL + pgvector
+✓ Local Ollama AI
+✓ AWS Bedrock AI
+✓ Provider Switching
+✓ AWS Deployment
+✓ Monitoring
+✓ CI/CD
+✓ Production Documentation
+
+================================================================================
+                           DAY 150
+                    FULL-STACK AI ENGINEER
+================================================================================
