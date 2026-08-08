@@ -180,3 +180,30 @@ PHASE 5: MODERN FRONTEND & CLOUD PRODUCTION (DAYS 121–150)
 [ ] Day 149: Put the final touches on your portfolio representations across GitHub and LinkedIn.
 [ ] Day 150: Milestone Achieved. Evolved into a highly specialized Full-Stack AI Engineer.
 ================================================================================
+
+
+
+## Overview of Your 150-Day Journey
+
+You are looking at a rigorous, industry-grade blueprint designed to transform a standard developer into a specialized **Full-Stack AI Engineer** proficient in Java (Spring Boot / Spring AI / LangChain4j), AWS Bedrock, Vector Databases, Autonomous Agents, Guardrails, and Next.js. 
+
+---
+
+### Key Technology Stack Matrix
+
+| Tier | Primary Technologies | Core Responsibilities |
+| :--- | :--- | :--- |
+| **Frontend** | Next.js, TypeScript, Tailwind CSS, shadcn/ui | UI rendering, streaming responses, chat layouts, admin dashboards. |
+| **Backend** | Spring Boot (Java 17/21), Spring AI, LangChain4j | Business logic, REST controllers, SSE streaming, chat memory management. |
+| **Cloud & AI** | AWS Bedrock (Claude 3.5 Sonnet, Amazon Nova), Titan | LLM hosting, text generation, embedding vector processing, native guardrails. |
+| **Database & Vector** | PostgreSQL (`pgvector`), Amazon OpenSearch | Relational persistence, session storage, semantic vector chunk indexing. |
+
+---
+
+### Phase Breakdown Summary
+
+*   **Phase 1 (Days 1–30):** Foundation of **Spring AI**, connecting to **AWS Bedrock**, implementing chat memory, prompt templates, structured JSON mapping, and streaming response setups using Server-Sent Events (SSE).
+*   **Phase 2 (Days 31–60):** **Enterprise RAG & Data Engineering**, integrating `pgvector` and OpenSearch, using Apache Tika for parsing PDFs, metadata filtering, chunking strategies, and hybrid retrieval.
+*   **Phase 3 (Days 61–90):** **Autonomous AI Agents & Tool Execution**, implementing function calling, Model Context Protocol (MCP), ReAct loops, tool safety bounds, and multi-agent coordination.
+*   **Phase 4 (Days 91–120):** **Enterprise Testing, Guardrails & Security**, configuring AWS Bedrock Guardrails, PII redaction, Resilience4j circuit breakers, rate-limiting, and evaluation metrics (faithfulness/relevance).
+*   **Phase 5 (Days 121–150):** **Modern Frontend & Cloud Production**, developing the Next.js App Router UI, containerizing via Docker, orchestration on **AWS ECS Fargate**, managing RDS PostgreSQL, and launching live production traffic.
