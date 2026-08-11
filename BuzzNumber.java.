@@ -1,0 +1,21 @@
+public class BuzzNumber
+ 
+ {
+   public static void main (String args [])
+    {
+     int num = 7;
+     
+      if(num % 7 ==0 || num % 10 == 0)
+      
+      {
+        System.out.println("It is a buz number");
+        
+        }
+        
+        else
+        {
+          System.out.prinntln("It is not a buzz number");
+          
+          }
+        
+          }
